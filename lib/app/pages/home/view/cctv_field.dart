@@ -7,8 +7,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'components/video_comp.dart';
-
 class CCTVField extends StatelessWidget {
   const CCTVField({super.key});
 
@@ -217,7 +215,7 @@ class __CCTVComponentState extends State<_CCTVComponent> {
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       width: isShow ? 500 : 0,
-                      child: Image.asset('assets/images/exec_count_people.png'),
+                      child: Image.network(widget.cctv.addr),
                     ),
                     if (isBlack)
                       Container(
