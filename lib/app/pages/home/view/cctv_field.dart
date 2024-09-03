@@ -37,35 +37,34 @@ class CCTVField extends StatelessWidget {
             child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                // child: Obx(() {
-                //   return Row(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: controller.cctv
-                //         .map(
-                //           (e) => Padding(
-                //             padding: const EdgeInsets.only(right: 10),
-                //             child: _CCTVComponent(cctv: e),
-                //           ),
-                //         )
-                //         .toList(),
-                //   );
-                // }),
                 child: Consumer(
                   builder:
                       (BuildContext context, WidgetRef ref, Widget? child) {
-                    var cctv = ref.watch(cCTVControllerProvider);
-                    print(cctv);
                     return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: ref
-                          .watch(cCTVControllerProvider)
-                          .map(
-                            (e) => Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: _CCTVComponent(cctv: e),
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ...ref.watch(cCTVControllerProvider).map(
+                              (e) => Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: _CCTVComponent(cctv: e),
+                              ),
                             ),
-                          )
-                          .toList(),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(30),
+                          onTap: () {},
+                          child: Container(
+                            width: 265,
+                            height: 265,
+                            decoration: BoxDecoration(
+                              color: secondaryColor.withOpacity(0.5),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(30),
+                              ),
+                            ),
+                            child: const Icon(Icons.add, size: 80),
+                          ),
+                        )
+                      ],
                     );
                   },
                 )),
@@ -118,7 +117,6 @@ class _CCTVComponent extends StatefulWidget {
 class __CCTVComponentState extends State<_CCTVComponent> {
   var isShow = false;
   var isDgragged = false;
-  var videoKey = GlobalKey();
   var isBlack = false;
   @override
   Widget build(BuildContext context) {
@@ -219,8 +217,7 @@ class __CCTVComponentState extends State<_CCTVComponent> {
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       width: isShow ? 500 : 0,
-                      child: VideoComponent(
-                          key: videoKey, src: 'assets/videos/cctv_normal.mp4'),
+                      child: Image.asset('assets/images/exec_count_people.png'),
                     ),
                     if (isBlack)
                       Container(
