@@ -1,4 +1,5 @@
 import 'package:dip_edge_front/app/common/responsive.dart';
+import 'package:dip_edge_front/app/common/service_screen_dialog.dart';
 import 'package:dip_edge_front/app/pages/home/controller/cctv_controller.dart';
 import 'package:dip_edge_front/app/pages/home/model/dip_cctv.dart';
 import 'package:dip_edge_front/colors.dart';
@@ -124,9 +125,15 @@ class __CCTVComponentState extends State<_CCTVComponent> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text("Confirm"),
+              title: Text("확인",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(color: Colors.white)),
               content: const Text(
-                  "Do you want to register face recognition service to this CCTV?"),
+                "이 CCTV에 dip-object-tracking 서비스를 등록하시겠습니까?",
+                style: TextStyle(color: Colors.white),
+              ),
               actions: [
                 TextButton(
                     onPressed: () {
@@ -215,7 +222,12 @@ class __CCTVComponentState extends State<_CCTVComponent> {
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       width: isShow ? 500 : 0,
-                      child: Image.network(widget.cctv.addr),
+                      child: Image.network(
+                        widget.cctv.addr,
+                        height: 260,
+                        width: 400,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     if (isBlack)
                       Container(
@@ -268,15 +280,14 @@ class __CCTVComponentState extends State<_CCTVComponent> {
                       child: InkWell(
                         focusColor: Colors.black,
                         onTap: () async {
-                          setState(() {
-                            isBlack = true;
-                          });
                           // await makeServiceDialog(context);
                           // Future.delayed(const Duration(milliseconds: 500), () {
                           //   setState(() {
                           //     isBlack = false;
                           //   });
                           // });
+
+                          await makeServiceScreenDialog(context);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -287,7 +298,7 @@ class __CCTVComponentState extends State<_CCTVComponent> {
                           ),
                           child: const Padding(
                             padding: EdgeInsets.all(15.0),
-                            child: Text('Face recognition'),
+                            child: Text('dip-object-tracking'),
                           ),
                         ),
                       ),
