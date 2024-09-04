@@ -113,7 +113,7 @@ class _CCTVComponent extends StatefulWidget {
 }
 
 class __CCTVComponentState extends State<_CCTVComponent> {
-  var isShow = false;
+  var isShow = true;
   var isDgragged = false;
   var isBlack = false;
   @override

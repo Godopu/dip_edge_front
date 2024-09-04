@@ -1,3 +1,4 @@
+import 'package:dip_edge_front/app/common/nvr_add_dialog.dart';
 import 'package:dip_edge_front/app/common/responsive.dart';
 import 'package:dip_edge_front/app/pages/home/controller/nvr_controller.dart';
 import 'package:dip_edge_front/app/pages/home/model/dip_nvr.dart';
@@ -6,7 +7,6 @@ import 'package:dip_edge_front/const.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NVRField extends StatelessWidget {
@@ -50,7 +50,9 @@ class NVRField extends StatelessWidget {
                             ),
                         InkWell(
                           borderRadius: BorderRadius.circular(30),
-                          onTap: () {},
+                          onTap: () {
+                            makeNVRAddDialog(context);
+                          },
                           child: Container(
                             width: 265,
                             height: 265,
